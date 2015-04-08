@@ -1,0 +1,321 @@
+<section id="container">
+    <header class="header dark-bg">
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+        </div>
+
+        <!--logo start-->
+        <a ng-href="/dashboard" class="logo">Trendy+ <span class="lite">Admin</span></a>
+        <!--logo end-->
+
+        <div class="top-nav notification-row">
+            <!-- notificatoin dropdown start-->
+            <ul class="nav pull-right top-menu">
+                <!-- alert notification end-->
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar1_small.jpg">
+                            </span>
+                        <span class="username">{{ user.username }}</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <li>
+                            <a ng-click="logout()"><i class="icon_chat_alt"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+            <!-- notificatoin dropdown end-->
+        </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a class="" ng-href="/">
+                        <i class="icon_house_alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <h3>Chart</h3>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-pane">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+                                            <header class="panel-heading">
+                                                User by Social network
+                                            </header>
+                                            <div class="panel-body text-center">
+                                                <div
+                                                        data-ac-chart="'pie'"
+                                                        data-ac-data="data"
+                                                        data-ac-config="config"
+                                                        class="chart" style="width: 1000px;height: 300px">
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <h3>User Table</h3>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-pane">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+
+                                                <table st-table="userTable" class="table table-striped" st-safe-src="userCollection">
+                                                <thead>
+                                                <tr>
+                                                    <th st-sort="username">Username</th>
+                                                    <th st-sort="email">Email</th>
+                                                    <th st-sort="gender">Gender</th>
+                                                    <th st-sort="delete_flag">Status</th>
+                                                    <th st-sort="created_at">Created at</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <input st-search="username" placeholder="search for username" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="email" placeholder="search for email" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="created_at" placeholder="search for Created at" class="input-sm form-control" type="search"/>
+                                                    </th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="row in userTable">
+                                                    <td>{{row.username}}</td>
+                                                    <td>{{row.email}}</td>
+                                                    <td ng-if="row.gender == 0"> Men</td>
+                                                    <td ng-if="row.gender == 1"> Woman</td>
+                                                    <td ng-if="row.delete_flag == 0" style="color: #2ac845"> LIVE</td>
+                                                    <td ng-if="row.delete_flag == 1" style="color: #ff0000"> BANNED</td>
+                                                    <td>{{row.created_at | date }}</td>
+                                                    <td ng-if="row.delete_flag == 0" ng-click="banUser(0, row.id, $index)"><button class="btn btn-primary">BAN</button></td>
+                                                    <td ng-if="row.delete_flag == 1" ng-click="banUser(1, row.id, $index)"><button class="btn btn-primary">UNBAN</button></td>
+                                                </tr>
+                                                </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="5" class="text-center">
+                                                                <div st-pagination=""  st-displayed-pages="10"></div>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                            </table>
+
+
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <h3>Shop Table</h3>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-pane" id="chartjs">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+
+                                            <table st-table="shopTable" class="table table-striped" st-safe-src="shopCollection">
+                                                <thead>
+                                                <tr>
+                                                    <th st-sort="name">Shop Name</th>
+                                                    <th st-sort="street">Street</th>
+                                                    <th st-sort="district">District</th>
+                                                    <th st-sort="city">City</th>
+                                                    <th st-sort="way_direction">Way direction</th>
+                                                    <th st-sort="time_open">Time open</th>
+                                                    <th st-sort="time_close">Time close</th>
+                                                    <th st-sort="price_from">Price from</th>
+                                                    <th st-sort="price_to">Price To</th>
+                                                    <th>Servicing time</th>
+                                                    <th>Service</th>
+                                                    <th>People</th>
+                                                    <th st-sort="tel">Telephone</th>
+                                                    <th st-sort="website">Telephone</th>
+                                                    <th st-sort="approve">Approve</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <input st-search="name" placeholder="search for shop name" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="street" placeholder="search for street" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="district" placeholder="search for district" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="city" placeholder="search for city" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="way_direction" placeholder="search for Way direction" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="time_open" placeholder="search for Time open" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="time_close" placeholder="search for Time close" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="price_from" placeholder="search for Price from" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="price_to" placeholder="search for Price To" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="tel" placeholder="search for Telephone" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="website" placeholder="search for Website" class="input-sm form-control" type="search"/>
+                                                    </th>
+
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="row in shopTable">
+                                                    <td>{{row.name}}</td>
+                                                    <td>{{row.street}}</td>
+                                                    <td>{{row.district}}</td>
+                                                    <td>{{row.city}}</td>
+                                                    <td>{{row.near_place}}</td>
+                                                    <td>{{row.way_direction}}</td>
+                                                    <td>{{row.time_open}}</td>
+                                                    <td>{{row.time_close}}</td>
+                                                    <td>{{row.price_from}}</td>
+                                                    <td>{{row.price_to}}</td>
+                                                    <td>
+                                                        <span ng-if="row.morning == 1">morning,</span>
+                                                        <span ng-if="row.midday == 1">midday,</span>
+                                                        <span ng-if="row.afternoon == 1">afternoon,</span>
+                                                        <span ng-if="row.night == 1">night</span>
+                                                    </td>
+                                                    <td>
+                                                        <span ng-if="row.shipping == 1">shipping,</span>
+                                                        <span ng-if="row.credit_card == 1">credit card,</span>
+                                                        <span ng-if="row.cooler == 1">cooler,</span>
+                                                        <span ng-if="row.parking == 1">parking,</span>
+                                                    </td>
+                                                    <td>
+                                                        <span ng-if="row.children == 1">children,</span>
+                                                        <span ng-if="row.teen == 1">teen,</span>
+                                                        <span ng-if="row.middleaged == 1">middleaged,</span>
+                                                        <span ng-if="row.oldster == 1">oldster,</span>
+                                                        <span ng-if="row.men == 1">men,</span>
+                                                        <span ng-if="row.women == 1">women,</span>
+                                                    </td>
+                                                    <td>{{row.tel}}</td>
+                                                    <td ng-if="row.approve == 0" style="color: #ff0000"> NO</td>
+                                                    <td ng-if="row.approve == 1" style="color: #2ac845"> YES</td>2ac845
+                                                    <td ng-if="row.approve == 0" ng-click="approveShop(0, row.id, $index)"><button class="btn btn-primary">APPROVE</button></td>
+                                                    <td ng-if="row.approve == 1" ng-click="approveShop(1, row.id, $index)"><button class="btn btn-primary">UNAPPROVE</button></td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <div st-pagination=""  st-displayed-pages="10"></div>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+
+
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+        </section>
+
+        <!--main content end-->
+    </section>
+</section>
