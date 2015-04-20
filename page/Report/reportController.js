@@ -11,7 +11,12 @@
     reportController.$inject = ['$scope', 'reportService', 'loginService', '$filter'];
 
     function reportController($scope, reportService, loginService, $filter) {
+        $scope.user = loginService.isLogin();
         $scope.logoutClickStatus = false;
+
+        $scope.logout = function () {
+            loginService.logOut();
+        };
 
         $scope.config = {
             title: 'Social network',
