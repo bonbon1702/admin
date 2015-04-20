@@ -41,13 +41,30 @@
             <!-- sidebar menu start-->
             <ul class="sidebar-menu">
                 <li class="active">
-                    <a class="" ng-href="/">
+                    <a class="" ng-href="#/manageUser">
+                        <i class="icon_id-2_alt"></i>
+                        <span>Manage User</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/managePost">
+                        <i class="icon_image"></i>
+                        <span>Manage Post</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/manageShop">
                         <i class="icon_house_alt"></i>
-                        <span>Dashboard</span>
+                        <span>Manage Shop</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/report">
+                        <i class="icon_piechart"></i>
+                        <span>Report</span>
                     </a>
                 </li>
             </ul>
-            <!-- sidebar menu end-->
         </div>
     </aside>
     <!--sidebar end-->
@@ -55,119 +72,6 @@
     <!--main content start-->
     <section id="main-content">
         <section class="wrapper">
-
-            <div class="row">
-
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            <h3>Chart</h3>
-                        </header>
-                        <div class="panel-body">
-                            <div class="tab-pane">
-                                <div class="row">
-
-                                    <div class="col-lg-12">
-                                        <section class="panel">
-                                            <header class="panel-heading">
-                                                User by Social network
-                                            </header>
-                                            <div class="panel-body text-center">
-                                                <div
-                                                        data-ac-chart="'pie'"
-                                                        data-ac-data="data"
-                                                        data-ac-config="config"
-                                                        class="chart" style="width: 1000px;height: 300px">
-                                                </div>
-                                            </div>
-                                        </section>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </section>
-                </div>
-
-            </div>
-            <div class="row">
-
-                <div class="col-lg-12">
-                    <section class="panel">
-                        <header class="panel-heading">
-                            <h3>User Table</h3>
-                        </header>
-                        <div class="panel-body">
-                            <div class="tab-pane">
-                                <div class="row">
-
-                                    <div class="col-lg-12">
-                                        <section class="panel">
-
-                                                <table st-table="userTable" class="table table-striped" st-safe-src="userCollection">
-                                                <thead>
-                                                <tr>
-                                                    <th st-sort="username">Username</th>
-                                                    <th st-sort="email">Email</th>
-                                                    <th st-sort="gender">Gender</th>
-                                                    <th st-sort="delete_flag">Status</th>
-                                                    <th st-sort="created_at">Created at</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                                <tr>
-                                                    <th>
-                                                        <input st-search="username" placeholder="search for username" class="input-sm form-control" type="search"/>
-                                                    </th>
-                                                    <th>
-                                                        <input st-search="email" placeholder="search for email" class="input-sm form-control" type="search"/>
-                                                    </th>
-                                                    <th>
-
-                                                    </th>
-                                                    <th>
-
-                                                    </th>
-                                                    <th>
-                                                        <input st-search="created_at" placeholder="search for Created at" class="input-sm form-control" type="search"/>
-                                                    </th>
-
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <tr ng-repeat="row in userTable">
-                                                    <td>{{row.username}}</td>
-                                                    <td>{{row.email}}</td>
-                                                    <td ng-if="row.gender == 0"> Men</td>
-                                                    <td ng-if="row.gender == 1"> Woman</td>
-                                                    <td ng-if="row.delete_flag == 0" style="color: #2ac845"> LIVE</td>
-                                                    <td ng-if="row.delete_flag == 1" style="color: #ff0000"> BANNED</td>
-                                                    <td>{{row.created_at | date }}</td>
-                                                    <td ng-if="row.delete_flag == 0" ng-click="banUser(0, row.id, $index)"><button class="btn btn-primary">BAN</button></td>
-                                                    <td ng-if="row.delete_flag == 1" ng-click="banUser(1, row.id, $index)"><button class="btn btn-primary">UNBAN</button></td>
-                                                </tr>
-                                                </tbody>
-                                                    <tfoot>
-                                                        <tr>
-                                                            <td colspan="5" class="text-center">
-                                                                <div st-pagination=""  st-displayed-pages="10"></div>
-                                                            </td>
-                                                        </tr>
-                                                    </tfoot>
-                                            </table>
-
-
-                                        </section>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </section>
-                </div>
-
-            </div>
             <div class="row">
 
                 <div class="col-lg-12">
@@ -194,11 +98,10 @@
                                                     <th st-sort="time_close">Time close</th>
                                                     <th st-sort="price_from">Price from</th>
                                                     <th st-sort="price_to">Price To</th>
-                                                    <th>Servicing time</th>
+                                                    <th>Serving time</th>
                                                     <th>Service</th>
                                                     <th>People</th>
                                                     <th st-sort="tel">Telephone</th>
-                                                    <th st-sort="website">Telephone</th>
                                                     <th st-sort="approve">Approve</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -260,7 +163,6 @@
                                                     <td>{{row.street}}</td>
                                                     <td>{{row.district}}</td>
                                                     <td>{{row.city}}</td>
-                                                    <td>{{row.near_place}}</td>
                                                     <td>{{row.way_direction}}</td>
                                                     <td>{{row.time_open}}</td>
                                                     <td>{{row.time_close}}</td>

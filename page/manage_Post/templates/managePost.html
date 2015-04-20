@@ -1,0 +1,153 @@
+<section id="container">
+    <header class="header dark-bg">
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+        </div>
+
+        <!--logo start-->
+        <a ng-href="/dashboard" class="logo">Trendy+ <span class="lite">Admin</span></a>
+        <!--logo end-->
+
+        <div class="top-nav notification-row">
+            <!-- notificatoin dropdown start-->
+            <ul class="nav pull-right top-menu">
+                <!-- alert notification end-->
+                <!-- user login dropdown start-->
+                <li class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="profile-ava">
+                                <img alt="" src="img/avatar1_small.jpg">
+                            </span>
+                        <span class="username">{{ user.username }}</span>
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu extended logout">
+                        <div class="log-arrow-up"></div>
+                        <li>
+                            <a ng-click="logout()"><i class="icon_chat_alt"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- user login dropdown end -->
+            </ul>
+            <!-- notificatoin dropdown end-->
+        </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a class="" ng-href="#/manageUser">
+                        <i class="icon_id-2_alt"></i>
+                        <span>Manage User</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/managePost">
+                        <i class="icon_image"></i>
+                        <span>Manage Post</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/manageShop">
+                        <i class="icon_house_alt"></i>
+                        <span>Manage Shop</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="" ng-href="#/report">
+                        <i class="icon_piechart"></i>
+                        <span>Report</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            <h3>User Table</h3>
+                        </header>
+                        <div class="panel-body">
+                            <div class="tab-pane">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <section class="panel">
+
+                                            <table st-table="postTable" class="table table-striped" st-safe-src="postCollection">
+                                                <thead>
+                                                <tr>
+                                                    <th st-sort="caption">Caption</th>
+                                                    <th st-sort="userid">UserId</th>
+                                                    <th>Image_Url</th>
+                                                    <th>Image_Url_Editor</th>
+                                                    <th st-sort="created-at">Created at</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        <input st-search="caption" placeholder="search for caption" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="userid" placeholder="search for UserID" class="input-sm form-control" type="search"/>
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+
+                                                    </th>
+                                                    <th>
+                                                        <input st-search="created_at" placeholder="search for Created at" class="input-sm form-control" type="search"/>
+                                                    </th>
+
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr ng-repeat="(postIndex,row) in postTable">
+                                                    <td style=" max-width: 109px;overflow-wrap: break-word;">{{row.caption}}</td>
+                                                    <td> {{ row.user_id }}</td>
+                                                    <td style="max-width: 357px;overflow-wrap: break-word;"> {{ row.image_url }}</td>
+                                                    <td> {{ row.image_url_editor }}</td>
+                                                    <td>{{ row.created_at | date }}</td>
+                                                    <td ng-click="deletePost(row.id, postIndex,postCollection)"><button class="btn btn-primary">DELETE</button></td>
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                    <td colspan="5" class="text-center">
+                                                        <div st-pagination=""  st-displayed-pages="10"></div>
+                                                    </td>
+                                                </tr>
+                                                </tfoot>
+                                            </table>
+
+
+                                        </section>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                </div>
+
+            </div>
+        </section>
+
+        <!--main content end-->
+    </section>
+</section>

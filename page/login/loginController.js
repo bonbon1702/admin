@@ -16,7 +16,7 @@
                 if (data.user){
                     $scope.error = '';
                     $window.sessionStorage["user"] = JSON.stringify(data.user);
-                    $location.path('/dashboard');
+                    $location.path('/manageUser');
                 } else {
                     $scope.error = "Incorrect Username/password, please check again! ";
                 }
