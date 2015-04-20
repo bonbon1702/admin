@@ -9,10 +9,19 @@
 
     function dashboardController($scope, manageUserService, $location, loginService, $filter) {
         $scope.user = loginService.isLogin();
+        $scope.logoutClickStatus = false;
 
         $scope.logout = function () {
             loginService.logOut();
         };
+
+        $scope.logoutClick = function () {
+            if($scope.logoutClickStatus == false ){
+                $scope.logoutClickStatus = true;
+            }
+            else
+                $scope.logoutClickStatus = false;
+        }
 
         manageUserService.getAllUser()
             .success(function (data) {

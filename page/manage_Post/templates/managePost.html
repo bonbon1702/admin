@@ -14,17 +14,17 @@
                 <!-- alert notification end-->
                 <!-- user login dropdown start-->
                 <li class="dropdown">
-                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                    <a data-toggle="dropdown" class="dropdown-toggle" ng-click="logoutClick()">
                             <span class="profile-ava">
                                 <img alt="" src="img/avatar1_small.jpg">
                             </span>
                         <span class="username">{{ user.username }}</span>
                         <b class="caret"></b>
                     </a>
-                    <ul class="dropdown-menu extended logout">
+                    <ul class="dropdown-menu extended logout" ng-class="{toggle : logoutClickStatus == true}">
                         <div class="log-arrow-up"></div>
                         <li>
-                            <a ng-click="logout()"><i class="icon_chat_alt"></i> Log Out</a>
+                            <a ng-click="logout()" href="#/"><i class="icon_chat_alt"></i> Log Out</a>
                         </li>
                     </ul>
                 </li>
@@ -77,7 +77,7 @@
                 <div class="col-lg-12">
                     <section class="panel">
                         <header class="panel-heading">
-                            <h3>User Table</h3>
+                            <h3>Post Table</h3>
                         </header>
                         <div class="panel-body">
                             <div class="tab-pane">
@@ -90,7 +90,7 @@
                                                 <thead>
                                                 <tr>
                                                     <th st-sort="caption">Caption</th>
-                                                    <th st-sort="userid">UserId</th>
+                                                    <th st-sort="user-id">UserId</th>
                                                     <th>Image_Url</th>
                                                     <th>Image_Url_Editor</th>
                                                     <th st-sort="created-at">Created at</th>
@@ -101,7 +101,7 @@
                                                         <input st-search="caption" placeholder="search for caption" class="input-sm form-control" type="search"/>
                                                     </th>
                                                     <th>
-                                                        <input st-search="userid" placeholder="search for UserID" class="input-sm form-control" type="search"/>
+                                                        <input st-search="user-id" placeholder="search for userid" class="input-sm form-control" type="search"/>
                                                     </th>
                                                     <th>
 
@@ -112,7 +112,9 @@
                                                     <th>
                                                         <input st-search="created_at" placeholder="search for Created at" class="input-sm form-control" type="search"/>
                                                     </th>
+                                                    <th>
 
+                                                    </th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>

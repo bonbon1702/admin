@@ -11,6 +11,8 @@
     reportController.$inject = ['$scope', 'reportService', 'loginService', '$filter'];
 
     function reportController($scope, reportService, loginService, $filter) {
+        $scope.logoutClickStatus = false;
+
         $scope.config = {
             title: 'Social network',
             tooltips: true,
@@ -27,6 +29,14 @@
                 position: 'right'
             }
         };
+
+        $scope.logoutClick = function () {
+            if($scope.logoutClickStatus == false ){
+                $scope.logoutClickStatus = true;
+            }
+            else
+                $scope.logoutClickStatus = false;
+        }
 
         $scope.data = {
             series: ['Facebook', 'Google', 'Twitter'],

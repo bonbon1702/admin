@@ -9,6 +9,7 @@
 
     function manageShopController($scope, manageShopService, loginService, $filter) {
         $scope.user = loginService.isLogin();
+        $scope.logoutClickStatus = false;
 
         $scope.logout = function () {
             loginService.logOut();
@@ -19,6 +20,14 @@
                 $scope.shopCollection = data.shops;
 
             }).error();
+
+        $scope.logoutClick = function () {
+            if($scope.logoutClickStatus == false ){
+                $scope.logoutClickStatus = true;
+            }
+            else
+                $scope.logoutClickStatus = false;
+        }
 
         $scope.approveShop = function (type, shop_id, index) {
             if (type == 0) {

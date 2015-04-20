@@ -8,19 +8,29 @@
     managePostController.$inject = ['$scope', 'managePostService', 'ngDialog', 'loginService', '$filter'];
 
     function managePostController($scope, managePostService, ngDialog, loginService, $filter) {
-        $scope.postCollection=[];
+        $scope.postCollection = [];
+        $scope.logoutClickStatus = false;
+
         $scope.user = loginService.isLogin();
 
         $scope.logout = function () {
             loginService.logOut();
         };
 
+        $scope.logoutClick = function () {
+            if($scope.logoutClickStatus == false ){
+                $scope.logoutClickStatus = true;
+            }
+            else
+                $scope.logoutClickStatus = false;
+        }
+
         managePostService.getAllPost()
             .success(function (data) {
                 $scope.postCollection = data.posts;
             }).error();
 
-        $scope.deletePost= function(post_id,index,postCollection){
+        $scope.deletePost = function (post_id, index, postCollection) {
             ngDialog.open({
                 template: 'page/manage_Shop/templates/confirmDeletePost.html',
                 className: 'ngdialog-theme-plain',
@@ -33,7 +43,7 @@
                         ngDialog.close();
                         managePostService.deletePost(post_id)
                             .success(function () {
-                                postCollection.splice(index,1);
+                                postCollection.splice(index, 1);
                             })
                             .error(function (data) {
                             });
