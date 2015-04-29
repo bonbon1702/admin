@@ -9,7 +9,15 @@
 
     function reportService($http, $rootScope){
         return {
-
+            getLikeInteraction: function(){
+                return $http.get($rootScope.url + 'admin/getInteractionLike');
+            },
+            getFavoriteInteraction: function(){
+                return $http.get($rootScope.url + 'admin/getFavoriteInteraction');
+            },
+            getCommentInteraction: function(){
+                return $http.get($rootScope.url + 'admin/getCommentInteraction');
+            }
         }
     }
 })(angular);
