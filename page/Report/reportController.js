@@ -1,19 +1,18 @@
 /**
  * Created by Nam on 19/4/2015.
  */
-/**
- * Created by Nam on 19/4/2015.
- */
 (function (angular) {
     angular.module('adminApp')
         .controller('reportController', reportController);
 
-    reportController.$inject = ['$scope', 'reportService', 'loginService', '$filter'];
+    reportController.$inject = ['$scope', 'reportService', 'manageUserService', 'loginService', '$filter'];
 
-    function reportController($scope, reportService, loginService, $filter) {
+    function reportController($scope, reportService, manageUserService, loginService, $filter) {
         $scope.user = loginService.isLogin();
         $scope.logoutClickStatus = false;
-
+        $scope.lstFb = [];
+        $scope.lstGg = [];
+        $scope.lstTw = [];
         $scope.logout = function () {
             loginService.logOut();
         };
@@ -26,35 +25,47 @@
                 $scope.logoutClickStatus = false;
         };
 
-        $scope.config = {
-            title: 'Social network',
-            tooltips: true,
-            labels: false,
-            mouseover: function () {
-            },
-            mouseout: function () {
-            },
-            click: function () {
-            },
-            legend: {
-                display: true,
-                position: 'right'
-            }
-        };
-
-        $scope.data = {
-            series: ['Facebook', 'Google', 'Twitter'],
-            data: [{
-                x: "Facebook",
-                y: [1000, 500, 0]
-            }, {
-                x: "Google",
-                y: [300, 100, 100]
-            }, {
-                x: "Twitter",
-                y: [51]
-            }]
-        };
+        manageUserService.getAllUser()
+            .success(function (data) {
+                $scope.userCollection = data.users;
+                for (var i = 0; i < $scope.userCollection.length; i++) {
+                    if ($scope.userCollection[i].sw_id != null && $scope.userCollection[i].sw_id.length == 15) {
+                        $scope.lstFb.push($scope.userCollection[i]);
+                    } else if ($scope.userCollection[i].sw_id != null && $scope.userCollection[i].sw_id.length == 21) {
+                        $scope.lstGg.push($scope.userCollection[i]);
+                    } else if ($scope.userCollection[i].sw_id != null && $scope.userCollection[i].sw_id.length == 10) {
+                        $scope.lstTw.push($scope.userCollection[i]);
+                    }
+                }
+                $scope.config = {
+                    title: 'Social network',
+                    tooltips: true,
+                    labels: false,
+                    mouseover: function () {
+                    },
+                    mouseout: function () {
+                    },
+                    click: function () {
+                    },
+                    legend: {
+                        display: true,
+                        position: 'right'
+                    }
+                };
+                $scope.data = {
+                    series: ['Facebook', 'Google', 'Twitter'],
+                    data: [{
+                        x: "Facebook",
+                        y: [(($scope.lstFb.length / $scope.userCollection.length) * 100)]
+                    }, {
+                        x: "Google",
+                        y: [(($scope.lstGg.length / $scope.userCollection.length) * 100)]
+                    }, {
+                        x: "Twitter",
+                        y: [(($scope.lstTw.length / $scope.userCollection.length) * 100)]
+                    }]
+                };
+            }).error();
 
         $scope.configInteraction = {
             "labels": false,
