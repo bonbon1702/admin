@@ -56,13 +56,13 @@
                     series: ['Facebook', 'Google', 'Twitter'],
                     data: [{
                         x: "Facebook",
-                        y: [(($scope.lstFb.length / $scope.userCollection.length) * 100)]
+                        y: [ Math.round( (($scope.lstFb.length / $scope.userCollection.length) * 100) * 10 ) / 10 ]
                     }, {
                         x: "Google",
-                        y: [(($scope.lstGg.length / $scope.userCollection.length) * 100)]
+                        y: [Math.round((($scope.lstGg.length / $scope.userCollection.length) * 100) * 10) / 10]
                     }, {
                         x: "Twitter",
-                        y: [(($scope.lstTw.length / $scope.userCollection.length) * 100)]
+                        y: [Math.round((($scope.lstTw.length / $scope.userCollection.length) * 100) * 10) / 10 ]
                     }]
                 };
             }).error();
