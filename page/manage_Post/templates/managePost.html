@@ -121,8 +121,8 @@
                                                 <tr ng-repeat="(postIndex,row) in postTable">
                                                     <td style=" max-width: 109px;overflow-wrap: break-word;">{{row.caption}}</td>
                                                     <td> {{ row.user_id }}</td>
-                                                    <td style="max-width: 357px;overflow-wrap: break-word;"> {{ row.image_url }}</td>
-                                                    <td> {{ row.image_url_editor }}</td>
+                                                    <td style="max-width: 357px;overflow-wrap: break-word;"> <img height="100" src="{{ row.image_url }}"/></td>
+                                                    <td> <img height="100" src="{{ row.image_url_editor }}"/> </td>
                                                     <td>{{ row.created_at | date }}</td>
                                                     <td ng-click="deletePost(row.id, postIndex,postCollection)"><button class="btn btn-primary">DELETE</button></td>
                                                 </tr>
